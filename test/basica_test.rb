@@ -1,4 +1,5 @@
-require File.expand_path("../lib/basica", File.dirname(__FILE__))
+require_relative "../lib/basica"
+
 include Basica
 
 scope do
@@ -19,14 +20,14 @@ scope do
       user == "foo" && pass == "baz"
     end
 
-    assert_equal false, result
+    assert_equal nil, result
   end
 
   test "bad request" do
-    assert_raise RuntimeError do
-      result = basic_auth(Hash.new) do |user, pass|
-        user == "foo" && pass == "baz"
-      end
+    result = basic_auth(Hash.new) do |user, pass|
+      user == "foo" && pass == "baz"
     end
+
+    assert_equal nil, result
   end
 end
